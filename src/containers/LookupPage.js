@@ -1,28 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import {Link} from 'react-router-dom';
+import Icon from '../components/common/Icon';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/searchActions';
-import SearchForm from '../components/SearchForm';
+import SearchResults from '../components/SearchResults';
 
 export const LookupPage = (props) => {
   return (
-    <SearchForm
-      saveFuelSavings={props.actions.saveFuelSavings}
-      calculateFuelSavings={props.actions.calculateFuelSavings}
-      fuelSavings={props.fuelSavings}
-    />
+    <div>
+      <Link to="/">
+        <Icon className="fa-long-arrow-left" />
+        {" Back"}
+      </Link>
+      <h1 className="alt-header"><strong>{props.match.params.letter}</strong> {props.match.params.artistOrTitle}s</h1>
+      <SearchResults searchTerm={props.match.params.letter} />
+    </div>
   );
 };
 
 LookupPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  fuelSavings: PropTypes.object.isRequired
+  match: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    fuelSavings: state.fuelSavings
+    songs: state.songs
   };
 }
 
@@ -32,7 +37,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(LookupPage);
+)(LookupPage));

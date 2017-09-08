@@ -25,7 +25,7 @@ class App extends React.Component {
         </Switch>
         <footer className="footer">
           <hr/>
-          <p>Made with <Icon className="fa-heart love" /> by <a href="https://twitter.com/kellycodes" target="_blank"><Icon className="fa-twitter" /> kellycodes</a>.</p>
+          <p>Made with <Icon className="fa-heart love" /> by <a href="https://twitter.com/kellycodes" target="_blank"><Icon className="fa-twitter" /> kellycodes</a>. <a href="#"><Icon className="fa-github" /></a></p>
         </footer>
       </div>
     );
