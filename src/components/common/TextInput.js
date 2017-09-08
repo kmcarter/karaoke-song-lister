@@ -7,7 +7,8 @@ const TextInput = (props) => {
   };
 
   return (
-    <input className={`form-control form-control-lg ${props.className}`} type="text" placeholder={props.placeholder} value={props.value} onChange={handleChange}/>
+    <input className={`form-control form-control-lg ${props.className}`} type="text" name={props.name}
+      placeholder={props.placeholder} value={props.value} onChange={handleChange}/>
   );
 };
 

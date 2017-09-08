@@ -22,9 +22,7 @@ class SearchResults extends React.Component {
 
   render() {
     return (
-      <div>
-        <SongTitleList data={this.state.data} />
-      </div>
+      <SongTitleList data={this.state.data} />
     );
   }
 }

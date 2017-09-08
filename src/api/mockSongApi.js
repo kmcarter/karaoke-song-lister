@@ -22,15 +22,15 @@ const songs = [
 
 class SongApi {
   static getAllSongs() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(Object.assign([], songs));
       }, delay);
     });
   }
 
-  static searchSongs(searchTerm) {
-    return new Promise((resolve, reject) => {
+  static searchSongs() {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(Object.assign([], songs));
       }, delay);

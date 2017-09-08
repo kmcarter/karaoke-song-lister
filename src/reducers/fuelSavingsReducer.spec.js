@@ -49,15 +49,15 @@ describe('Reducers::FuelSavings', () => {
     expect(reducer(undefined, action)).toEqual(expected);
   });
 
-  it('should handle SAVE_FUEL_SAVINGS', () => {
-    const action = { type: ActionTypes.SAVE_FUEL_SAVINGS, dateModified, settings: getAppState() };
+  it('should handle LIST_SONGS', () => {
+    const action = { type: ActionTypes.LIST_SONGS, dateModified, settings: getAppState() };
     const expected = Object.assign(getAppState(), { dateModified });
 
     expect(reducer(getAppState(), action)).toEqual(expected);
   });
 
-  it('should handle CALCULATE_FUEL_SAVINGS', () => {
-    const action = { type: ActionTypes.CALCULATE_FUEL_SAVINGS, dateModified, settings: getAppState(), fieldName: 'newMpg', value: 30 };
+  it('should handle SEARCH_SONGS', () => {
+    const action = { type: ActionTypes.SEARCH_SONGS, dateModified, settings: getAppState(), fieldName: 'newMpg', value: 30 };
 
     const expectedMpg = 30;
     const expectedSavings = { monthly: '$43.33', annual: '$519.96', threeYear: '$1,559.88' };

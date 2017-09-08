@@ -5,36 +5,28 @@ import TextInput from './TextInput';
 describe('<TextInput />', () => {
   it('should be an input element', () => {
     const props = {
-      name: 'testName',
+      name: "search",
       onChange: jest.fn(),
-      placeholder: 'Type Here',
-      value: 100
+      value: "ab"
     };
 
     const wrapper = shallow(<TextInput {...props} />);
 
-    const actual = wrapper.type();
-    const expected = 'input';
-
-    expect(actual).toEqual(expected);
+    expect(wrapper.type()).toEqual('input');
   });
 
   it('should handle change', () => {
     const props = {
-      name: 'newMpg',
+      name: "search",
       onChange: jest.fn(),
-      placeholder: 'Type Here',
-      value: 100
+      value: "ab"
     };
 
     const wrapper = shallow(<TextInput {...props} />);
 
-    const actual = wrapper.type();
-    const expected = 'input';
-
-    expect(actual).toEqual(expected);
+    expect(wrapper.type()).toEqual('input');
     expect(props.onChange).not.toBeCalled();
-    wrapper.simulate('change', {target: {value: 101}});
-    expect(props.onChange).toBeCalledWith('newMpg', 101);
+    wrapper.simulate('change', {target: {value: "abc"}});
+    expect(props.onChange).toBeCalledWith('search', "abc");
   });
 });

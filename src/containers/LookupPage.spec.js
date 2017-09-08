@@ -1,17 +1,18 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {LookupPage} from './LookupPage';
-import FuelSavingsForm from '../components/FuelSavingsForm';
+import SearchResults from '../components/SearchResults';
 
 describe('<LookupPage />', () => {
-  it('should contain <FuelSavingsForm />', () => {
-    const actions = {
-      saveFuelSavings: () => { },
-      calculateFuelSavings: () => { }
+  it('should contain <SearchResults />', () => {
+    const match = {
+      params: {
+        letter: "b",
+        artistOrTitle: "artist"
+      }
     };
-    const fuelSavings = {};
-    const wrapper = shallow(<LookupPage actions={actions} fuelSavings={fuelSavings}/>);
+    const wrapper = shallow(<LookupPage match={match} />);
 
-    expect(wrapper.find(FuelSavingsForm).length).toEqual(1);
+    expect(wrapper.find(SearchResults).length).toEqual(1);
   });
 });

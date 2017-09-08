@@ -1,63 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FuelSavingsResults from './FuelSavingsResults';
+import SearchResults from './SearchResults';
+import SongTitleList from './common/SongTitleList';
 
-describe('<FuelSavingsResults />', () => {
-  it('should display savings when savings exist', () => {
-    const savings = {
-      monthly: '10',
-      annual: '120',
-      threeYear: '360'
+describe('<SearchResults />', () => {
+  it('should display <SongTitleList />', () => {
+    const props = {
+      searchTerm: "abc"
     };
 
-    const wrapper = shallow(<FuelSavingsResults savings={savings}/>);
+    const wrapper = shallow(<SearchResults {...props} />);
     // console.log(wrapper.debug()); // View shallowly rendered component
-    const actual = wrapper.find('.fuel-savings-label').text();
-    const expected = 'Savings';
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should give values a \'savings\' class when savings exist', () => {
-    const savings = {
-      monthly: '10',
-      annual: '120',
-      threeYear: '360'
-    };
-
-    const wrapper = shallow(<FuelSavingsResults savings={savings}/>);
-
-    const actual = wrapper.find('.savings').length;
-    const expected = 3;
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should display loss when savings don\'t exist', () => {
-    const savings = {
-      monthly: '-10',
-      annual: '-120',
-      threeYear: '-360'
-    };
-
-    const wrapper = shallow(<FuelSavingsResults savings={savings}/>);
-
-    const actual = wrapper.find('.fuel-savings-label').text();
-    const expected = 'Loss';
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should give values a \'loss\' class when savings don\'t exist', () => {
-    const savings = {
-      monthly: '-10',
-      annual: '-120',
-      threeYear: '-360'
-    };
-
-    const wrapper = shallow(<FuelSavingsResults savings={savings}/>);
-    const actual = wrapper.find('.loss').length;
-    const expected = 3;
+    const actual = wrapper.find(SongTitleList).first().text();
+    const expected = '<SongTitleList />';
 
     expect(actual).toEqual(expected);
   });
