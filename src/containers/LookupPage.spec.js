@@ -1,16 +1,16 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {FuelSavingsPage} from './FuelSavingsPage';
+import {LookupPage} from './LookupPage';
 import FuelSavingsForm from '../components/FuelSavingsForm';
 
-describe('<FuelSavingsPage />', () => {
+describe('<LookupPage />', () => {
   it('should contain <FuelSavingsForm />', () => {
     const actions = {
       saveFuelSavings: () => { },
       calculateFuelSavings: () => { }
     };
     const fuelSavings = {};
-    const wrapper = shallow(<FuelSavingsPage actions={actions} fuelSavings={fuelSavings}/>);
+    const wrapper = shallow(<LookupPage actions={actions} fuelSavings={fuelSavings}/>);
 
     expect(wrapper.find(FuelSavingsForm).length).toEqual(1);
   });

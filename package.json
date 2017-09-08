@@ -30,7 +30,10 @@
   "author": "Kelly Carter",
   "license": "MIT",
   "dependencies": {
+    "bootstrap-4": "^4.0.0",
+    "jquery": "^3.2.1",
     "object-assign": "4.1.0",
+    "popper.js": "^1.12.5",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-redux": "5.0.5",

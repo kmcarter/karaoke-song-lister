@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router';
-import { Switch, NavLink } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import HomePage from './HomePage';
-import FuelSavingsPage from '../containers/FuelSavingsPage';
-import AboutPage from './AboutPage';
+import LookupPage from '../containers/LookupPage'; // eslint-disable-line import/no-named-as-default
+import SearchPage from '../containers/SearchPage'; // eslint-disable-line import/no-named-as-default
 import NotFoundPage from './NotFoundPage';
 
 // This is a class-based component because the current
@@ -14,20 +14,12 @@ import NotFoundPage from './NotFoundPage';
 
 class App extends React.Component {
   render() {
-    const activeStyle = { color: 'blue' };
     return (
       <div>
-        <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
-          {' | '}
-          <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
-          {' | '}
-          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
-        </div>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/fuel-savings" component={FuelSavingsPage} />
-          <Route path="/about" component={AboutPage} />
+          <Route path="lookup/:search" component={SearchPage} />
+          <Route path="lookup/:artist_or_song/:letter" component={LookupPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

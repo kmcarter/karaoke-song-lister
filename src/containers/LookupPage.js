@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/fuelSavingsActions';
 import FuelSavingsForm from '../components/FuelSavingsForm';
 
-export const FuelSavingsPage = (props) => {
+export const LookupPage = (props) => {
   return (
     <FuelSavingsForm
       saveFuelSavings={props.actions.saveFuelSavings}
@@ -15,7 +15,7 @@ export const FuelSavingsPage = (props) => {
   );
 };
 
-FuelSavingsPage.propTypes = {
+LookupPage.propTypes = {
   actions: PropTypes.object.isRequired,
   fuelSavings: PropTypes.object.isRequired
 };
@@ -35,4 +35,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FuelSavingsPage);
+)(LookupPage);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AboutPage from './AboutPage';
+import SearchPage from './SearchPage';
 
-describe('<AboutPage />', () => {
+describe('<SearchPage />', () => {
   it('should have a header called \'About\'', () => {
-    const wrapper = shallow(<AboutPage />);
+    const wrapper = shallow(<SearchPage />);
     const actual = wrapper.find('h2').text();
     const expected = 'About';
 
@@ -12,7 +12,7 @@ describe('<AboutPage />', () => {
   });
 
   it('should have a header with \'alt-header\' class', () => {
-    const wrapper = shallow(<AboutPage />);
+    const wrapper = shallow(<SearchPage />);
     const actual = wrapper.find('h2').prop('className');
     const expected = 'alt-header';
 
@@ -20,7 +20,7 @@ describe('<AboutPage />', () => {
   });
 
   it('should link to an unknown route path', () => {
-    const wrapper = shallow(<AboutPage />);
+    const wrapper = shallow(<SearchPage />);
     const actual = wrapper.findWhere(n => n.prop('to') === '/badlink').length;
     const expected = 1;
 
