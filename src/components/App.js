@@ -3,9 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router';
 import { Switch } from 'react-router-dom';
+import Icon from './common/Icon';
 import HomePage from './HomePage';
 import LookupPage from '../containers/LookupPage'; // eslint-disable-line import/no-named-as-default
-import SearchPage from '../containers/SearchPage'; // eslint-disable-line import/no-named-as-default
+import SearchResultsPage from '../containers/SearchResultsPage'; // eslint-disable-line import/no-named-as-default
 import NotFoundPage from './NotFoundPage';
 
 // This is a class-based component because the current
@@ -15,13 +16,17 @@ import NotFoundPage from './NotFoundPage';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="lookup/:search" component={SearchPage} />
-          <Route path="lookup/:artist_or_song/:letter" component={LookupPage} />
+          <Route path="/search/:search" component={SearchResultsPage} />
+          <Route path="/lookup/:artistOrTitle/:letter" component={LookupPage} />
           <Route component={NotFoundPage} />
         </Switch>
+        <footer className="footer">
+          <hr/>
+          <p>Made with <Icon className="fa-heart love" /> by <a href="https://twitter.com/kellycodes" target="_blank"><Icon className="fa-twitter" /> kellycodes</a>.</p>
+        </footer>
       </div>
     );
   }

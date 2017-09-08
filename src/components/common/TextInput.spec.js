@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FuelSavingsTextInput from './FuelSavingsTextInput';
+import TextInput from './TextInput';
 
-describe('<FuelSavingsTextInput />', () => {
+describe('<TextInput />', () => {
   it('should be an input element', () => {
     const props = {
       name: 'testName',
@@ -11,7 +11,7 @@ describe('<FuelSavingsTextInput />', () => {
       value: 100
     };
 
-    const wrapper = shallow(<FuelSavingsTextInput {...props} />);
+    const wrapper = shallow(<TextInput {...props} />);
 
     const actual = wrapper.type();
     const expected = 'input';
@@ -27,7 +27,7 @@ describe('<FuelSavingsTextInput />', () => {
       value: 100
     };
 
-    const wrapper = shallow(<FuelSavingsTextInput {...props} />);
+    const wrapper = shallow(<TextInput {...props} />);
 
     const actual = wrapper.type();
     const expected = 'input';

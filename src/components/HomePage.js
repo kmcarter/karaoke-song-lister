@@ -1,16 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import SearchForm from './SearchForm';
+import AlphabetList from '../components/common/AlphabetList';
 
 const HomePage = () => {
   return (
     <div>
-      <h1>LividLiquid Karaoke Song List</h1>
-
-      <h2>Get Started</h2>
-      <ol>
-        <li>Review the <Link to="/fuel-savings">demo app</Link></li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
+      <div className="jumbotron">
+        <h1>LividLiquid Karaoke Song List</h1>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <div className="card mb-3">
+            <div className="card-header">
+              <h3>List by Artist</h3>
+            </div>
+            <div className="card-body">
+              <AlphabetList artistOrTitle="artist" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+        <div className="card mb-3">
+          <div className="card-header">
+            <h3>List by Title</h3>
+            </div>
+            <div className="card-body">
+              <AlphabetList artistOrTitle="title" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+        <div className="card mb-3">
+          <div className="card-header">
+            <h3>Search by Keyword</h3>
+            </div>
+            <div className="card-body">
+              <SearchForm />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

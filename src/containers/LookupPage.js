@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/fuelSavingsActions';
-import FuelSavingsForm from '../components/FuelSavingsForm';
+import * as actions from '../actions/searchActions';
+import SearchForm from '../components/SearchForm';
 
 export const LookupPage = (props) => {
   return (
-    <FuelSavingsForm
+    <SearchForm
       saveFuelSavings={props.actions.saveFuelSavings}
       calculateFuelSavings={props.actions.calculateFuelSavings}
       fuelSavings={props.fuelSavings}
