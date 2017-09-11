@@ -1,2 +1,3 @@
-export const SEARCH_SONGS = 'SEARCH_SONGS';
+export const LOADING = 'LOADING';
+export const SAVE_SEARCH_RESULTS = 'SAVE_SEARCH_RESULTS';
 export const LIST_SONGS = 'LIST_SONGS';

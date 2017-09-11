@@ -5,14 +5,14 @@ import {withRouter} from 'react-router';
 import BackButton from '../components/common/BackButton';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/searchActions';
-import SearchResults from '../components/SearchResults';
+import LookupResults from '../components/LookupResults';
 
 export const LookupPage = (props) => {
   return (
     <div>
       <BackButton />
       <h1 className="text-capitalize"><strong>{props.match.params.letter}</strong> {props.match.params.artistOrTitle}s</h1>
-      <SearchResults searchTerm={props.match.params.letter} />
+      <LookupResults artistOrTitle={props.match.params.artistOrTitle} searchTerm={props.match.params.letter} />
     </div>
   );
 };

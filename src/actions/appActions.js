@@ -1,9 +1,9 @@
 import * as types from '../constants/actionTypes';
 
-export function saveSearchResults(settings) {
+export function loading(settings) {
   return function (dispatch) {
     return dispatch({
-      type: types.SAVE_SEARCH_RESULTS,
+      type: types.LOADING,
       settings
     });
   };
