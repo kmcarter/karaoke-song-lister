@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
-import HomePage from './components/HomePage';
+import HomePage from './containers/HomePage';
 import LookupPage from './containers/LookupPage'; // eslint-disable-line import/no-named-as-default
 import SearchResultsPage from './containers/SearchResultsPage'; // eslint-disable-line import/no-named-as-default
-import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './containers/NotFoundPage';
 
 export default (
   <Route path="/" component={App}>

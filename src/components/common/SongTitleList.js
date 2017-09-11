@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const SongTitleList = props => {
     return (
-        <ul>
+        <ul className="list-group">
             {props.data.map(song => 
-                <li key={song.id}>{song.artist} - {song.title}</li>
+                <li key={song.id} className="list-group-item">{song.artist} - {song.title}</li>
             )}
         </ul>
     );

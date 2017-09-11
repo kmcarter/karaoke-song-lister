@@ -50,7 +50,7 @@ class SearchForm extends React.Component {
               Search term must be at least 3 characters long.
             </small>
           </div>
-          <div className="col-sm col-sm-auto">
+          <div className="col-xs col-xs-auto">
             <button type="submit" onClick={this.onSubmit} className="btn btn-primary btn-lg">
               <Icon className="fa-search" />
               {" Search"}

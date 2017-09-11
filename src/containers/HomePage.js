@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchForm from './SearchForm';
+import SearchForm from '../components/SearchForm';
 import AlphabetList from '../components/common/AlphabetList';
 
 const HomePage = () => {
   return (
     <div>
-      <div className="jumbotron">
+      <div className="jumbotron mt-3">
         <h1>LividLiquid Karaoke Song List</h1>
       </div>
       <div className="row">

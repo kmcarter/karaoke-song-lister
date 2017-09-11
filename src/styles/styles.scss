@@ -16,7 +16,7 @@ body {
 
 .alphabet-list {
   .btn {
-    text-transform: uppercase;
+    width: 2.5em;
   }
 }
 
@@ -29,5 +29,21 @@ body {
 footer {
   .love {
     color: $vin-red;
+  }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  .fa {
+    position: relative;
+    top: 50%;
   }
 }

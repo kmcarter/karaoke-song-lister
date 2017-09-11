@@ -7,11 +7,11 @@ const AlphabetList = props => {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     return (
-        <div className="btn-group alphabet-list" role="group" aria-label="List of letters">
-            {alphabet.map(alpha =>
-                <Link key={alpha} to={`lookup/${props.artistOrTitle}/${alpha}`} className="btn btn-secondary">{alpha}</Link>
+        <div className="alphabet-list d-flex flex-wrap" role="group" aria-label="List of letters">
+            {alphabet.map(alpha => 
+                <Link key={alpha} to={`lookup/${props.artistOrTitle}/${alpha}`} className="btn btn-secondary btn-lg m-1 text-uppercase">{alpha}</Link>
             )}
-            <Link to={`lookup/${props.artistOrTitle}/num`} className="btn btn-secondary">#</Link>
+            <Link to={`lookup/${props.artistOrTitle}/num`} className="btn btn-secondary btn-lg m-1 text-uppercase">#</Link>
         </div>
     );
 };
