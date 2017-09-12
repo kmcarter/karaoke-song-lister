@@ -11,37 +11,32 @@ class LookupResults extends React.Component {
   constructor(props) {
     super(props);
     this.getLookupData = this.getLookupData.bind(this);
-    this.state = {
-      data: []
-    };
   }
 
   componentWillMount() {
-    this.getLookupData(this.props.artistOrTitle, this.props.searchTerm);
+    if (!this.props.lookup[this.props.artistOrTitle].hasOwnProperty(this.props.searchTerm)) {
+      this.getLookupData();
+    }
   }
 
-  getLookupData(artistOrTitle, searchTerm) {
+  getLookupData() {
     const thisComp = this;
+    const artistOrTitle = this.props.artistOrTitle;
+    const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
 
-    if (this.props.lookup[artistOrTitle].hasOwnProperty(searchTerm)) {
-      thisComp.setState({ data: this.props.lookup[artistOrTitle][searchTerm] });
+    const songApiLookup = artistOrTitle === "artist" ? SongApi.lookupSongsByArtist : SongApi.lookupSongsByTitle;
+    songApiLookup(searchTerm).then(results => {
+      thisComp.props.lookupActions.saveLookupResults({ artistOrTitle, searchTerm, results });
       thisComp.props.appActions.loading(false);
-    } else {
-      const songApiLookup = artistOrTitle === "artist" ? SongApi.lookupSongsByArtist : SongApi.lookupSongsByTitle;
-      songApiLookup(searchTerm).then(results => {
-        thisComp.setState({ data: results });
-        thisComp.props.lookupActions.saveLookupResults({ artistOrTitle, searchTerm, results });
-        thisComp.props.appActions.loading(false);
-      }).catch(error => {
-        throw (error);
-      });
-    }
+    }).catch(error => {
+      throw (error);
+    });
   }
 
   render() {
     return (
-      <SongTitleList data={this.state.data} />
+      <SongTitleList data={this.props.lookup[this.props.artistOrTitle][this.props.searchTerm] || []} />
     );
   }
 }

@@ -11,36 +11,30 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.getSearchData = this.getSearchData.bind(this);
-    this.state = {
-      data: []
-    };
   }
 
   componentWillMount() {
-    this.getSearchData(this.props.searchTerm);
+    if (!this.props.search.hasOwnProperty(this.props.searchTerm)) {
+      this.getSearchData();
+    }
   }
 
-  getSearchData(searchTerm) {
+  getSearchData() {
     const thisComp = this;
+    const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
 
-    if (this.props.search.hasOwnProperty(searchTerm)) {
-      thisComp.setState({data: this.props.search[searchTerm]});
+    SongApi.searchSongs(searchTerm).then(results => {
+      thisComp.props.searchActions.saveSearchResults({searchTerm, results});
       thisComp.props.appActions.loading(false);
-    } else {
-      SongApi.searchSongs(searchTerm).then(results => {
-        thisComp.setState({data: results});
-        thisComp.props.searchActions.saveSearchResults({searchTerm, results});
-        thisComp.props.appActions.loading(false);
-      }).catch(error => {
-        throw(error);
-      });
-    }
+    }).catch(error => {
+      throw(error);
+    });
   }
 
   render() {
     return (
-      <SongTitleList data={this.state.data} />
+      <SongTitleList data={this.props.search[this.props.searchTerm] || []} />
     );
   }
 }
