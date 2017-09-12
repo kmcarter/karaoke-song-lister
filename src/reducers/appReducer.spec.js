@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/actionTypes';
-import reducer from './fuelSavingsReducer';
+import reducer from './appReducer';
 import {getFormattedDateTime} from '../utils/dateHelper';
 
 describe('Reducers::FuelSavings', () => {
@@ -50,7 +50,7 @@ describe('Reducers::FuelSavings', () => {
   });
 
   it('should handle LIST_SONGS', () => {
-    const action = { type: ActionTypes.LIST_SONGS, dateModified, settings: getAppState() };
+    const action = { type: ActionTypes.LOOKUP_SONGS, dateModified, settings: getAppState() };
     const expected = Object.assign(getAppState(), { dateModified });
 
     expect(reducer(getAppState(), action)).toEqual(expected);

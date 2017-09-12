@@ -46,7 +46,7 @@ SearchResults.propTypes = {
   searchTerm: PropTypes.string.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     search: state.search
   };

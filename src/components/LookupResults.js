@@ -49,7 +49,7 @@ LookupResults.propTypes = {
   artistOrTitle: PropTypes.oneOf(["artist", "title"]).isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     lookup: state.lookup
   };

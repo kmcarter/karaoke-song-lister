@@ -19,7 +19,7 @@ LoadingSpinner.defaultProps = {
     loading: true
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     loading: state.app.loading
   };
