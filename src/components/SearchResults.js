@@ -25,7 +25,7 @@ class SearchResults extends React.Component {
     this.props.appActions.loading(true);
 
     SongApi.searchSongs(searchTerm).then(response => {
-      const results = response.data;
+      const results = response.data.results;
       thisComp.props.searchActions.saveSearchResults({searchTerm, results});
       thisComp.props.appActions.loading(false);
     }).catch(error => {

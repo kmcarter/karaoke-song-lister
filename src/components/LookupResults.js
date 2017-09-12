@@ -27,7 +27,7 @@ class LookupResults extends React.Component {
 
     const songApiLookup = artistOrTitle === "artist" ? SongApi.lookupSongsByArtist : SongApi.lookupSongsByTitle;
     songApiLookup(searchTerm).then(response => {
-      const results = response.data;
+      const results = response.data.results;
       thisComp.props.lookupActions.saveLookupResults({ artistOrTitle, searchTerm, results });
       thisComp.props.appActions.loading(false);
     }).catch(error => {
