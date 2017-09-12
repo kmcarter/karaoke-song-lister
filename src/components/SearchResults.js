@@ -34,8 +34,12 @@ class SearchResults extends React.Component {
   }
 
   render() {
+    const data = this.props.search[this.props.searchTerm] || [];
+
     return (
-      <SongTitleList data={this.props.search[this.props.searchTerm] || []} />
+      <div>
+        <SongTitleList data={data} />
+      </div>
     );
   }
 }
