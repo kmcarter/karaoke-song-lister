@@ -36,7 +36,7 @@ class SongApi {
       }, delay);
     });
   }
-  
+
   static lookupSongsByArtist() {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -44,7 +44,7 @@ class SongApi {
       }, delay);
     });
   }
-  
+
   static lookupSongsByTitle() {
     return new Promise((resolve) => {
       setTimeout(() => {
