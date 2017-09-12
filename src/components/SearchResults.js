@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as appActions from '../actions/appActions';
 import * as searchActions from '../actions/searchActions';
 import SongTitleList from './common/SongTitleList';
-import SongApi from '../api/mockSongApi';
+import SongApi from '../api/songApi';
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class SearchResults extends React.Component {
     const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
 
-    SongApi.searchSongs(searchTerm).then(results => {
+    SongApi.searchSongs(searchTerm).then(response => {
+      const results = response.data;
       thisComp.props.searchActions.saveSearchResults({searchTerm, results});
       thisComp.props.appActions.loading(false);
     }).catch(error => {

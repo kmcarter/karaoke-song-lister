@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as appActions from '../actions/appActions';
 import * as lookupActions from '../actions/lookupActions';
 import SongTitleList from './common/SongTitleList';
-import SongApi from '../api/mockSongApi';
+import SongApi from '../api/songApi';
 
 class LookupResults extends React.Component {
   constructor(props) {
@@ -26,7 +26,8 @@ class LookupResults extends React.Component {
     this.props.appActions.loading(true);
 
     const songApiLookup = artistOrTitle === "artist" ? SongApi.lookupSongsByArtist : SongApi.lookupSongsByTitle;
-    songApiLookup(searchTerm).then(results => {
+    songApiLookup(searchTerm).then(response => {
+      const results = response.data;
       thisComp.props.lookupActions.saveLookupResults({ artistOrTitle, searchTerm, results });
       thisComp.props.appActions.loading(false);
     }).catch(error => {
