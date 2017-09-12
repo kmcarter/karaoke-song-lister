@@ -36,6 +36,22 @@ class SongApi {
       }, delay);
     });
   }
+  
+  static lookupSongsByArtist() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(Object.assign([], songs));
+      }, delay);
+    });
+  }
+  
+  static lookupSongsByTitle() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(Object.assign([], songs));
+      }, delay);
+    });
+  }
 }
 
 export default SongApi;
