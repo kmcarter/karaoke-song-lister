@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import BackButton from '../components/common/BackButton';
 import SearchResults from '../components/SearchResults';
-import '../styles/about-page.css';
 
 const SearchResultsPage = props => {
   return (
