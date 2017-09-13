@@ -21,6 +21,7 @@ function formatLookupResults(state, settings) {
   });
   return Object.assign({}, state, {
     [settings.artistOrTitle]: {
+      ...state[settings.artistOrTitle],
       [settings.searchTerm]: {
         pagination: settings.response.pagination,
         results: existingResult.concat(resultsWithIndex)

@@ -1,7 +1,7 @@
 export default {
   lookup: {
-    artist: [],
-    title: []
+    artist: {},
+    title: {}
   },
   search: {},
   app: {

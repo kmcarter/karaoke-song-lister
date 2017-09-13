@@ -70,10 +70,11 @@ class LookupResults extends React.Component {
   render() {
     const lookup = this.props.lookup[this.props.artistOrTitle][this.props.searchTerm];
     const data = this.getPaginatedData(lookup);
+    const count = lookup ? lookup.pagination.count : data.length;
 
     return (
       <div>
-        <Pagination count={data.length} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
+        <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
         <SongTitleList data={data} />
       </div>
     );

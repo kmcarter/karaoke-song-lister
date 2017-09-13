@@ -40,7 +40,7 @@ class SearchResults extends React.Component {
   }
 
   getPaginatedData(lookup) {
-    if (!lookup) {
+    if (!lookup || lookup.pagination.count == 0) {
       return [];
     }
 
@@ -68,11 +68,13 @@ class SearchResults extends React.Component {
   render() {
     const lookup = this.props.search[this.props.searchTerm];
     const data = this.getPaginatedData(lookup);
+    const count = lookup ? lookup.pagination.count : data.length;
 
     return (
       <div>
-        <Pagination count={data.length} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
-        <SongTitleList data={data} />
+        { count > 0 && <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} /> }
+        { count > 0 && <SongTitleList data={data} /> }
+        { count == 0 && <p className="alert alert-warning" role="alert">No results found.</p> }
       </div>
     );
   }
