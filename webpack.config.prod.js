@@ -9,7 +9,8 @@ import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
-  __DEV__: false
+  __DEV__: false,
+  __API__: JSON.stringify("https://api.karaoke.lividliquid.com")
 };
 
 export default {
