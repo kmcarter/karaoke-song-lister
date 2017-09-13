@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as appActions from '../actions/appActions';
 import * as searchActions from '../actions/searchActions';
+import Pagination from './common/Pagination';
 import SongTitleList from './common/SongTitleList';
 import SongApi from '../api/songApi';
 
@@ -11,6 +12,12 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.getSearchData = this.getSearchData.bind(this);
+    this.getPaginatedData = this.getPaginatedData.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
+    this.state = {
+      page: 0,
+      perPage: 100
+    };
   }
 
   componentWillMount() {
@@ -19,25 +26,52 @@ class SearchResults extends React.Component {
     }
   }
 
-  getSearchData() {
+  getSearchData(page = 0, perPage = 100) {
     const thisComp = this;
     const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
 
-    SongApi.searchSongs(searchTerm).then(response => {
-      const results = response.data.results;
-      thisComp.props.searchActions.saveSearchResults({searchTerm, results});
+    SongApi.searchSongs(searchTerm, page, perPage).then(response => {
+      thisComp.props.searchActions.saveSearchResults({ searchTerm, response: response.data });
       thisComp.props.appActions.loading(false);
     }).catch(error => {
-      throw(error);
+      throw (error);
     });
   }
 
+  getPaginatedData(lookup) {
+    if (!lookup) {
+      return [];
+    }
+
+    const pageInfo = lookup.pagination;
+
+    if (pageInfo.count <= this.state.perPage) {
+      return lookup.results;
+    }
+
+    const startIndex = this.state.page * this.state.perPage;
+    const endIndex = startIndex + this.state.perPage;
+    const filteredResults = lookup.results.filter(val => {
+      return val.Index >= startIndex && val.Index < endIndex;
+    });
+    if (filteredResults.length == 0) {
+      this.getSearchData(this.state.page, this.state.perPage);
+    }
+    return filteredResults;
+  }
+
+  onPageChange(e, newPage) {
+    this.setState({ page: newPage });
+  }
+
   render() {
-    const data = this.props.search[this.props.searchTerm] || [];
+    const lookup = this.props.search[this.props.searchTerm];
+    const data = this.getPaginatedData(lookup);
 
     return (
       <div>
+        <Pagination count={data.length} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
         <SongTitleList data={data} />
       </div>
     );
