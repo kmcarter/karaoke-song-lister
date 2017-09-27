@@ -27,8 +27,7 @@ class App extends React.Component {
         <footer className="footer">
           <hr/>
           <p>
-            Made with <Icon className="fa-heart love" /> by <a href="https://twitter.com/kellycodes" target="_blank"><Icon className="fa-twitter" /> kellycodes</a>.
-            <a href="https://github.com/kmcarter/karaoke-song-lister/" target="_blank"><Icon className="fa-github" /></a>
+            Made with <Icon className="fa-heart love" /> by <a href="https://twitter.com/kellycodes" target="_blank"><Icon className="fa-twitter" /> kellycodes</a>. <a href="https://github.com/kmcarter/karaoke-song-lister/" target="_blank"><Icon className="fa-github" /></a>
           </p>
         </footer>
         <LoadingSpinner />

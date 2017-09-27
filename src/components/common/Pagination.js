@@ -31,7 +31,7 @@ const Pagination = props => {
         Page {props.page + 1} of {totalNumPages + 1}
       </div>
       <div className="col-4" />
-      <div className="col-4 mb-3">
+      <div className="col-4">
         <div className="input-group input-group-sm">
           <span className="input-group-btn">
             <PaginationLink onClick={onPreviousClick} disabled={props.page == 0}><Icon className="fa-arrow-left" /></PaginationLink>
