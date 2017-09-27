@@ -76,6 +76,7 @@ class LookupResults extends React.Component {
       <div>
         <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
         <SongTitleList data={data} />
+        <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
       </div>
     );
   }
