@@ -71,6 +71,10 @@ class LookupResults extends React.Component {
     const lookup = this.props.lookup[this.props.artistOrTitle][this.props.searchTerm];
     const data = this.getPaginatedData(lookup);
     const count = lookup ? lookup.pagination.count : data.length;
+    
+    if (count == 0) {
+      return <p className="alert alert-warning" role="alert">No results found.</p>;
+    }
 
     return (
       <div>
