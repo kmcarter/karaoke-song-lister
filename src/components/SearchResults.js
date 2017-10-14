@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import * as types from '../constants/searchTypes';
 import * as appActions from '../actions/appActions';
 import * as searchActions from '../actions/searchActions';
 import Pagination from './common/Pagination';
@@ -21,7 +22,7 @@ class SearchResults extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.search.hasOwnProperty(this.props.searchTerm)) {
+    if (!this.props.searchCache.hasOwnProperty(this.props.searchTerm)) {
       this.getSearchData();
     }
   }
@@ -31,8 +32,9 @@ class SearchResults extends React.Component {
     const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
 
-    SongApi.searchSongs(searchTerm, page, perPage).then(response => {
-      thisComp.props.searchActions.saveSearchResults({ searchTerm, response: response.data });
+    const search = getSongApiCall(thisComp.props.searchType);
+    search(searchTerm, page, perPage).then(response => {
+      saveSearchResults(thisComp.props, { searchTerm, response: response.data });
       thisComp.props.appActions.loading(false);
     }).catch(error => {
       throw (error);
@@ -66,7 +68,7 @@ class SearchResults extends React.Component {
   }
 
   render() {
-    const lookup = this.props.search[this.props.searchTerm];
+    const lookup = this.props.searchCache[this.props.searchTerm];
     const data = this.getPaginatedData(lookup);
     const count = lookup ? lookup.pagination.count : data.length;
 
@@ -87,13 +89,56 @@ class SearchResults extends React.Component {
 SearchResults.propTypes = {
   appActions: PropTypes.object.isRequired,
   searchActions: PropTypes.object.isRequired,
-  search: PropTypes.object,
-  searchTerm: PropTypes.string.isRequired
+  searchCache: PropTypes.object,
+  searchTerm: PropTypes.string.isRequired,
+  searchType: PropTypes.oneOf(types.TYPES).isRequired
 };
 
-function mapStateToProps(state) {
+function getResultsCache(state, type) {
+  switch (type) {
+    case types.TYPE_SEARCH:
+      return state.search;
+    case types.TYPE_ARTIST:
+      return state.artist;
+    case types.TYPE_TITLE:
+      return state.title;
+    default:
+      throw("Invalid search type passed to SearchResults component.");
+  }
+}
+
+function saveSearchResults(props, data) {
+  switch (props.searchType) {
+    case types.TYPE_SEARCH:
+      props.searchActions.saveSearchResults(data);
+      break;
+    case types.TYPE_ARTIST:
+      props.searchActions.saveArtistResults(data);
+      break;
+    case types.TYPE_TITLE:
+      props.searchActions.saveTitleResults(data);
+      break;
+    default:
+      throw("Invalid search type passed to SearchResults component.");
+  }
+}
+
+function getSongApiCall(type) {
+  switch (type) {
+    case types.TYPE_SEARCH:
+      return SongApi.searchSongs;
+    case types.TYPE_ARTIST:
+      return SongApi.lookupSongsByArtist;
+    case types.TYPE_TITLE:
+      return SongApi.lookupSongsByTitle;
+    default:
+      throw("Invalid search type passed to SearchResults component.");
+  }
+}
+
+function mapStateToProps(state, ownProps) {
   return {
-    search: state.search
+    searchCache: getResultsCache(state.search, ownProps.searchType)
   };
 }
 

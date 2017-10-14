@@ -8,3 +8,21 @@ export function saveSearchResults(settings) {
     });
   };
 }
+
+export function saveArtistResults(settings) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.SAVE_ARTIST_RESULTS,
+      settings
+    });
+  };
+}
+
+export function saveTitleResults(settings) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.SAVE_TITLE_RESULTS,
+      settings
+    });
+  };
+}
