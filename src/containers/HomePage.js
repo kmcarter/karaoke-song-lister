@@ -13,6 +13,18 @@ const HomePage = () => {
       </div>
       <div className="row">
         <div className="col-12">
+        <div className="card mb-3">
+          <div className="card-header">
+            <h3>Search by Keyword</h3>
+            </div>
+            <div className="card-body">
+              <SearchForm />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
           <div className="card mb-3">
             <div className="card-header">
               <h3>Song List by Artist</h3>
@@ -31,18 +43,6 @@ const HomePage = () => {
             </div>
             <div className="card-body">
               <AlphabetList artistOrTitle="title" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
-        <div className="card mb-3">
-          <div className="card-header">
-            <h3>Search by Keyword</h3>
-            </div>
-            <div className="card-body">
-              <SearchForm />
             </div>
           </div>
         </div>
