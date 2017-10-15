@@ -26,3 +26,12 @@ export function saveTitleResults(settings) {
     });
   };
 }
+
+export function invalidateCache(settings) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.INVALIDATE_CACHE,
+      settings
+    });
+  };
+}

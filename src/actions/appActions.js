@@ -8,3 +8,12 @@ export function loading(settings) {
     });
   };
 }
+
+export function setResultsPerPage(settings) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.SET_RESULTS_PER_PAGE,
+      settings
+    });
+  };
+}

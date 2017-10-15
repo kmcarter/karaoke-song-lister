@@ -15,9 +15,9 @@ class SearchResults extends React.Component {
     this.getSearchData = this.getSearchData.bind(this);
     this.getPaginatedData = this.getPaginatedData.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
+    this.onPerPageChange = this.onPerPageChange.bind(this);
     this.state = {
-      page: 0,
-      perPage: 100
+      page: 0
     };
   }
 
@@ -27,7 +27,7 @@ class SearchResults extends React.Component {
     }
   }
 
-  getSearchData(page = 0, perPage = 100) {
+  getSearchData(page = 0, perPage = this.props.resultsPerPage) {
     const thisComp = this;
     const searchTerm = this.props.searchTerm;
     this.props.appActions.loading(true);
@@ -48,23 +48,29 @@ class SearchResults extends React.Component {
 
     const pageInfo = lookup.pagination;
 
-    if (pageInfo.count <= this.state.perPage) {
+    if (pageInfo.count <= this.props.resultsPerPage) {
       return lookup.results;
     }
 
-    const startIndex = this.state.page * this.state.perPage;
-    const endIndex = startIndex + this.state.perPage;
+    const startIndex = this.state.page * this.props.resultsPerPage;
+    const endIndex = startIndex + this.props.resultsPerPage;
     const filteredResults = lookup.results.filter(val => {
       return val.Index >= startIndex && val.Index < endIndex;
     });
     if (filteredResults.length == 0) {
-      this.getSearchData(this.state.page, this.state.perPage);
+      this.getSearchData(this.state.page);
     }
     return filteredResults;
   }
 
   onPageChange(e, newPage) {
     this.setState({ page: newPage });
+  }
+
+  onPerPageChange(e, newPerPage) {
+    this.props.searchActions.invalidateCache();
+    this.props.appActions.setResultsPerPage(newPerPage);
+    this.getSearchData(this.state.page, newPerPage);
   }
 
   render() {
@@ -78,9 +84,9 @@ class SearchResults extends React.Component {
 
     return (
       <div>
-        <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
+        <Pagination count={count} page={this.state.page} perPage={this.props.resultsPerPage} onClick={this.onPageChange} onPerPageChange={this.onPerPageChange} />
         <SongTitleList data={data} />
-        <Pagination count={count} page={this.state.page} perPage={this.state.perPage} onClick={this.onPageChange} />
+        <Pagination count={count} page={this.state.page} perPage={this.props.resultsPerPage} onClick={this.onPageChange} onPerPageChange={this.onPerPageChange} />
       </div>
     );
   }
@@ -91,7 +97,8 @@ SearchResults.propTypes = {
   searchActions: PropTypes.object.isRequired,
   searchCache: PropTypes.object,
   searchTerm: PropTypes.string.isRequired,
-  searchType: PropTypes.oneOf(types.TYPES).isRequired
+  searchType: PropTypes.oneOf(types.TYPES).isRequired,
+  resultsPerPage: PropTypes.number.isRequired
 };
 
 function getResultsCache(state, type) {
@@ -138,7 +145,8 @@ function getSongApiCall(type) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    searchCache: getResultsCache(state.search, ownProps.searchType)
+    searchCache: getResultsCache(state.searchCache, ownProps.searchType),
+    resultsPerPage: state.app.resultsPerPage
   };
 }
 

@@ -1,7 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 import initialState from './initialState';
 
-export default function searchReducer(state = initialState.search, action) {
+export default function searchReducer(state = initialState.searchCache, action) {
   switch (action.type) {
     case actionTypes.SAVE_SEARCH_RESULTS:
       return formatResults(state, "search", action.settings);
@@ -9,6 +9,8 @@ export default function searchReducer(state = initialState.search, action) {
       return formatResults(state, "artist", action.settings);
     case actionTypes.SAVE_TITLE_RESULTS:
       return formatResults(state, "title", action.settings);
+    case actionTypes.INVALIDATE_CACHE:
+      return invalidateCache(initialState.searchCache);
     default:
       return state;
   }
@@ -31,4 +33,8 @@ function formatResults(state, key, settings) {
       }
     }
   });
+}
+
+function invalidateCache(initialState) {
+  return Object.assign({}, initialState);
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from './Icon';
+import PerPageSelector from './PerPageSelector';
 import PaginationLink from './PaginationLink';
 
 const Pagination = props => {
@@ -20,6 +21,10 @@ const Pagination = props => {
     props.onClick(e, parseInt(e.currentTarget.value));
   };
 
+  const onPerPageChange = e => {
+    props.onPerPageChange(e, parseInt(e.currentTarget.value));
+  };
+
   let rows = [];
   for (let i = 0; i <= totalNumPages; i++) {
     rows.push(<option key={i} value={i}>{i + 1}</option>);
@@ -27,10 +32,14 @@ const Pagination = props => {
 
   return (
     <form className="row" aria-label="Search results navigation">
-      <div className="col-4 pt-2">
+    <div className="col-4">
+      <PerPageSelector value={props.perPage} onChange={onPerPageChange}>
+        {[10, 100, 200, 500]}
+      </PerPageSelector>
+    </div>
+      <div className="col-4 pt-2 text-center">
         Page {props.page + 1} of {totalNumPages + 1}
       </div>
-      <div className="col-4" />
       <div className="col-4">
         <div className="input-group input-group-sm">
           <span className="input-group-btn">
@@ -52,7 +61,8 @@ Pagination.propTypes = {
   count: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
-  perPage: PropTypes.number.isRequired
+  perPage: PropTypes.number.isRequired,
+  onPerPageChange: PropTypes.func.isRequired
 };
 
 export default Pagination;
