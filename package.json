@@ -29,7 +29,7 @@
   "author": "Kelly Carter",
   "license": "MIT",
   "dependencies": {
-    "axios": "~0.18.1",
+    "axios": "~0.21.1",
     "bootstrap-4": "^4.0.0",
     "font-awesome": "~4.7.0",
     "jquery": "3.4.1",
